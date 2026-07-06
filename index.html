@@ -428,6 +428,265 @@ letter-spacing:-2px;
 
 }
 
+/* ---------- Mobile Fix (<=480px) ---------- */
+
+@media screen and (max-width:480px){
+
+.container{
+    width:92%;
+}
+
+/* Hero */
+
+.hero{
+    min-height:auto;
+    padding-top:110px;
+    padding-bottom:70px;
+}
+
+.hero-meta{
+    display:none;
+}
+
+.hero-grid{
+    display:flex;
+    flex-direction:column-reverse;
+    gap:40px;
+}
+
+/* Typography */
+
+.hero-title{
+
+    font-size:clamp(58px,20vw,82px);
+
+    line-height:.82;
+
+    letter-spacing:-3px;
+
+    word-break:keep-all;
+
+}
+
+.word{
+
+    justify-content:flex-start;
+
+}
+
+.word span{
+
+    display:inline-block;
+
+}
+
+/* Hero image */
+
+.hero-image{
+
+    width:100%;
+
+    max-width:300px;
+
+    margin:auto;
+
+}
+
+.hero-image::before{
+
+    inset:-12px;
+
+}
+
+.hero-image img{
+
+    width:100%;
+
+    height:auto;
+
+}
+
+/* Hero text */
+
+.hero-text{
+
+    width:100%;
+
+    font-size:18px;
+
+    line-height:1.8;
+
+}
+
+/* Buttons */
+
+.hero-actions{
+
+    flex-direction:column;
+
+    width:100%;
+
+    gap:16px;
+
+}
+
+.hero-actions .btn{
+
+    width:100%;
+
+    text-align:center;
+
+}
+
+/* Scroll indicator */
+
+.hero-footer{
+
+    margin-top:50px;
+
+}
+
+/* Projects */
+
+.project,
+.project.reverse{
+
+    grid-template-columns:1fr;
+
+    gap:35px;
+
+}
+
+.project-image{
+
+    width:100%;
+
+}
+
+.project-content{
+
+    width:100%;
+
+}
+
+.project-content h3{
+
+    font-size:34px;
+
+}
+
+.project-no{
+
+    font-size:48px;
+
+}
+
+/* Timeline */
+
+.timeline{
+
+    padding-left:28px;
+
+}
+
+.timeline-line{
+
+    left:10px;
+
+}
+
+.timeline-dot{
+
+    left:-18px;
+
+    width:12px;
+
+    height:12px;
+
+}
+
+.timeline-card{
+
+    padding:24px;
+
+}
+
+/* Skills */
+
+.skills-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+/* Contact */
+
+.contact-grid{
+
+    display:grid;
+
+    grid-template-columns:1fr;
+
+    gap:20px;
+
+}
+
+.contact-card{
+
+    width:100%;
+
+    padding:24px;
+
+}
+
+.contact-card h3{
+
+    font-size:20px;
+
+    word-break:break-word;
+
+}
+
+.contact-title{
+
+    font-size:56px;
+
+    line-height:.9;
+
+    letter-spacing:-2px;
+
+}
+
+/* Footer */
+
+.footer-content{
+
+    flex-direction:column;
+
+    align-items:flex-start;
+
+    gap:20px;
+
+}
+
+/* Prevent overflow */
+
+img,
+video,
+canvas{
+
+    max-width:100%;
+
+}
+
+*{
+
+    max-width:100%;
+
+}
+
+}
+
 </style>
 
 </head>
