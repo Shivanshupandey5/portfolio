@@ -503,11 +503,32 @@ SP
 
 <div class="hero-content">
 
-<h1 class="hero-title">
+<h1 class="hero-title" id="heroTitle">
 
-<span class="outline">SHIVANSHU</span>
+<div class="word outline">
 
-<span>PANDEY</span>
+<span>S</span>
+<span>H</span>
+<span>I</span>
+<span>V</span>
+<span>A</span>
+<span>N</span>
+<span>S</span>
+<span>H</span>
+<span>U</span>
+
+</div>
+
+<div class="word filled">
+
+<span>P</span>
+<span>A</span>
+<span>N</span>
+<span>D</span>
+<span>E</span>
+<span>Y</span>
+
+</div>
 
 </h1>
 
@@ -624,21 +645,11 @@ gap:70px;
 }
 
 .hero-title{
-
-display:flex;
-
-flex-direction:column;
-
-font-size:clamp(90px,13vw,220px);
-
-line-height:.82;
-
-letter-spacing:-10px;
-
-font-weight:900;
-
-text-transform:uppercase;
-
+    display:flex;
+    flex-direction:column;
+    line-height:.82;
+    user-select:none;
+    perspective:1200px;
 }
 
 .hero-title span{
@@ -3283,6 +3294,51 @@ font-size:17px;
 
 }
 
+.hero-title{
+
+display:flex;
+flex-direction:column;
+line-height:.82;
+
+}
+
+.word{
+    display:flex;
+    flex-wrap:nowrap;
+}
+
+.word span{
+
+    display:inline-block;
+
+    position:relative;
+
+    transform-style:preserve-3d;
+
+    will-change:transform,color;
+
+    transition:
+
+        color .35s,
+
+        -webkit-text-stroke .35s;
+
+}
+
+.word.outline span{
+
+    color:transparent;
+
+    -webkit-text-stroke:2px #111;
+
+}
+
+.word.filled span{
+
+    color:#111;
+
+}
+
 </style>
 
 <script>
@@ -3324,6 +3380,91 @@ behavior:"smooth"
 });
 
 });
+
+const letters = document.querySelectorAll(".hero-title span");
+
+const mouse = {
+    x: -1000,
+    y: -1000
+};
+
+window.addEventListener("mousemove", (e) => {
+    mouse.x = e.clientX;
+    mouse.y = e.clientY;
+});
+
+letters.forEach(letter => {
+    letter.tx = 0;
+    letter.ty = 0;
+    letter.rot = 0;
+    letter.scale = 1;
+});
+
+function animateLetters() {
+
+    letters.forEach(letter => {
+
+        const rect = letter.getBoundingClientRect();
+
+        const cx = rect.left + rect.width / 2;
+        const cy = rect.top + rect.height / 2;
+
+        const dx = mouse.x - cx;
+        const dy = mouse.y - cy;
+
+        const distance = Math.hypot(dx, dy);
+
+        const radius = 260;
+
+        let targetX = 0;
+        let targetY = 0;
+        let targetRot = 0;
+        let targetScale = 1;
+
+        if (distance < radius) {
+
+            const force = (radius - distance) / radius;
+
+            targetX = dx * 0.28 * force;
+            targetY = dy * 0.28 * force;
+
+            targetRot = dx * 0.05 * force;
+
+            targetScale = 1 + force * 0.22;
+
+            targetRot += Math.sin(Date.now() / 80 + distance) * force * 5;
+
+            if (letter.parentElement.classList.contains("outline")) {
+                letter.style.color = "#111";
+                letter.style.webkitTextStroke = "0";
+            }
+
+        } else {
+
+            if (letter.parentElement.classList.contains("outline")) {
+                letter.style.color = "transparent";
+                letter.style.webkitTextStroke = "2px #111";
+            }
+
+        }
+
+        letter.tx += (targetX - letter.tx) * 0.12;
+        letter.ty += (targetY - letter.ty) * 0.12;
+        letter.rot += (targetRot - letter.rot) * 0.12;
+        letter.scale += (targetScale - letter.scale) * 0.12;
+
+        letter.style.transform = `
+            translate(${letter.tx}px, ${letter.ty}px)
+            rotate(${letter.rot}deg)
+            scale(${letter.scale})
+        `;
+
+    });
+
+    requestAnimationFrame(animateLetters);
+}
+
+animateLetters();
 
 </script>
 
